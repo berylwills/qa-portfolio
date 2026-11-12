@@ -26,11 +26,20 @@ enough money’.”
 |Is the PIN correct?|T|T|T|T|F|F|F|F|
 |Is the balance enough?|T|T|F|F|T|T|F|F|
 |Is the account frozen|T|F|T|F|T|F|T|F|
-|Allow Transfer||X|||
+|Allow Transfer||X|||||||
 |Wrong PIN|||||X|X|X|X|
 |Not enough money|||X|X|||||
 |Account Frozen|X||X||X||X||
 
+## Merged Conditions with accountfrozen condition *(assuming the PIN is correct)*
+
+||R1|R2|R3|R4|
+|---|---|---|---|---|
+|Is the balance enough?|T|T|F|F|
+|Is the account frozen|T|F|T|F|
+|Allow Transfer||X|||
+|Not enough money|||X|X|
+|Account Frozen|X||X||
 
 ## Questions
 - If the account is frozen and the PIN is wrong, which message appears first?
