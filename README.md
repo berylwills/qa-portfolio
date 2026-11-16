@@ -6,6 +6,7 @@ Come with me on this journey where I'm relearning QA Engineering and everything 
 
 ## What's in this repo
 - [Week 1](week-01/feature-map.md) – Testing basics and a feature map of the Sauce Demo app
+- [Week 2](week-02/test-design.md) - Practice table and testing web designs
 
 ## What I'm learning
 - Testing fundamentals (ISTQB Foundation syllabus)
