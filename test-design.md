@@ -1,0 +1,3 @@
+- Date: 15th Nov 2026
+- Browser: Chrome on Macbook
+- Site: [Input page](https://the-internet.herokuapp.com/inputs.)
