@@ -14,19 +14,31 @@ This is a simple one-page site that displays a header, "Inputs", and shows an em
 
 ## Partitions
 
-|PARTITION|VALUES|EXPECTED RESULTS|
-|---|---|---|
-|Valid values (1-50)|1, 4, 25|Accepted|
-|Below Min value|0, -1, -5|Rejected|
-|Above Max value|51, 97, 105|Rejected|
-|Empty field|Blank|Rejected|
-|Non-Numbers|*, $, #|Rejected|
-|Letters/Text|red, Naomi|Rejected|
-|Decimals|5.3, 7.8|Rejected|
-|Very long Numbers|637463223364|Rejected|
+|PARTITION|VALUES|EXPECTED RESULTS|ACTUAL RESULTS
+|---|---|---|---|
+|Valid values (1-50)|1, 4, 25|Accepted|Values accepted in field|
+|Below Min value|0, -1, -5|Rejected|Values accepted in field|
+|Above Max value|51, 97, 105|Rejected|Values accepted in field|
+|Empty field|Blank|Rejected|N/A|
+|Non-Numbers|*, $, #|Rejected|Values rejected in field|
+|Letters/Text|red, Naomi|Rejected|Values rejected in field. Except 'e'|
+|Decimals|5.3, 7.8|Rejected|Values accepted in field|
+|Very long Numbers|637463223364|Rejected|Values accepted in field|
+
+'e' means raised to the power of a number. The field accepts 'e'. (3e45, 2e3, etc)
 
 ## Boundary Values
 
-|BOUNDARY VALUE|VALUES|EXPECTED RESULTS|
-|---|---|---|
+|2 BOUNDARY VALUE|EXPECTED RESULTS|ACTUAL RESULTS|3BOUNDARY VALUE|EXPECTED RESULTS|ACTUAL RESULTS|
+|---|---|---|---|---|---|
+|0|Rejected|Accepted|0|Rejected|Accepted|
+|1|Accepted|Accepted|1|Accepted|Accepted|
+|-|-|-|2|Accepted|Accepted|
+|50|Accepted|Accepted|49|Accepted|Accepted|
+|51|Rejected|Accepted|50|Accepted|Accepted|
+|-|-|-|51|Rejected|Accepted|
+
+
+
+
 
