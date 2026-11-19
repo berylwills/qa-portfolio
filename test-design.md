@@ -41,21 +41,129 @@ This is a simple one-page site that displays a header, "Inputs", and shows an em
 |51|Invalid|50|Valid|
 |-|-|51|Invalid|
 
-2 Boundary values and 3 Boundary values, based on the accepted 1-50
+2 Boundary values and 3 Boundary values, based on the accepted 1-50 values
 
 
 ## 2. Sauce Demo checkout form 
 Website: [Sauce Demo](https://www.saucedemo.com/) <br>
 Login cred: Username 'standard_user', Password 'secret sauce' <br>
 Log in, add product to cart, go to cart, and click checkout <br>
-This page displays a checkout form with three empty fields requesting for the user's first name, last name, and zip/postal code. There's also a 'cancel' button and a 'checkout' button.
+This page displays a checkout form with three empty fields requesting for the user's first name, last name, and zip/postal code. There's also a 'cancel' button and a 'checkout' button. <br>
+There are no specific requirements for validation
 
 ### First name (partitions, boundaries, why) 
+Assumptions:
+- First name is required
+- Min length is 3 characters
+- Max length is 30 characters
+- Only Letters, hyphens and apostrophes are allowed
+- Numbers, symbols, and underscores are invalid
 
+PARTITIONS **(Based on assumptions)**
+|Partition|Test data|Expected Results|Why|
+|---|---|---|---|
+|Empty||invalid|First name is required|
+|Normal value|Naomi|Valid|Basic name|
+|Very short|Na|Invalid|Below the min length|
+|Very long|"45 characters"|Invalid|Above max length|
+|Only Spaces|"   "|Invalid|Spaces alone is not a valid name|
+|numbers in name|Naomi456|Invalid|Numbers are not allowed|
+|Symbols|*&%@|Invalid|Symbols alone are not allowed|
+|Hyphenated name|Jack-Sparrow|Valid|Hyphens are accepted|
+|Apostrophe|D'Angelo|Valid|Hyphens are accepted|
+
+Boundary Values **(Based on assumptions)**
+
+|Boundary|Value|Expected results|
+|---|---|---|
+|Below Min|2 characters|Invalid|
+|Minimum|3 characters|Valid|
+|Just above min|4 characters|Valid|
+|Just below max|29 characters|Valid|
+|Maximum|30 characters|Valid|
+Above max|31 characters|Invalid|
 
 ### Last name (partitions, boundaries, why) 
+Assumptions:
+- Last name is required
+- Min length is 3 characters
+- Max length is 30 characters
+- Only Letters, hyphens and apostrophes are allowed
+- Numbers, symbols, and underscores are invalid
+
+PARTITIONS **(Based on assumptions)**
+|Partition|Test data|Expected Results|Why|
+|---|---|---|---|
+|Empty||invalid|First name is required|
+|Normal value|Paul|Valid|Basic name|
+|Very short|Na|Invalid|Below the min length|
+|Very long|"45 characters"|Invalid|Above max length|
+|Only Spaces|"   "|Invalid|Spaces alone is not a valid name|
+|numbers in name|Paul456|Invalid|Numbers are not allowed|
+|Symbols|*&%@|Invalid|Symbols alone are not allowed|
+|Hyphenated name|Jack-Sparrow|Valid|Hyphens are accepted|
+|Apostrophe|D'Angelo|Valid|Hyphens are accepted|
+
+Boundary Values **(Based on assumptions)**
+|Boundary|Value|Expected results|
+|---|---|---|
+|Below Min|2 characters|Invalid|
+|Minimum|3 characters|Valid|
+|Just above min|4 characters|Valid|
+|Just below max|29 characters|Valid|
+|Maximum|30 characters|Valid|
+|Above max|31 characters|Invalid|
+
 ### Postal code (partitions, boundaries, why) 
-### Tests I ran and what I observed ### Questions
+Assumptions:
+- Postal code is required
+- Min length is 4 characters
+- Max length is 10 characters
+- Only Letters and Numbers are allowed
+- Special characters are invalid
+  
+PARTITIONS  **(Based on assumptions)**
+
+|Partition|Test data|Expected Results|Why|
+|---|---|---|---|
+|Empty||Invalid|Postal code is required|
+|Normal numeric code|100001|Valid|A normal 6 digit postal code (for Lagos)|
+|Very short|101|Invalid|Below min length|
+|Very long|12345678901|Invalid|Above max length|
+|Only Spaces|"   "|Invalid|Not a postal code|
+|Letters only|GTSJRBC|Valid|Letters are allowed|
+|Symbols Only|*%#&@|Invalid|Symbols are not allowed|
+|Symbols and numbers|6979&%3|Invalid|Special characters not allowed|
+
+ Boundary Values **(Based on assumptions)**
+|Boundary|Value|Expected results|
+|---|---|---|
+|Below Min|3 characters|Invalid|
+|Minimum|4 characters|Valid|
+|Just above min|5 characters|Valid|
+|Just below max|9 characters|Valid|
+|Maximum|10 characters|Valid|
+Above max|11 characters|Invalid|
+
+
+
+### Tests I ran and what I observed 
+Valid data <br>
+- First Name: Jane
+- Last Name: Doe
+- Postal Code: 100001
+
+|Test ID| First Name|Last Name|Postal Code|Response|
+|---|---|---|---|---|
+|TC01|Jane|Doe|100001||
+|TC02||Doe|100001|
+|TC03|Jane||100001|
+|TC04|Jane|Doe||
+|TC05||Doe||
+|TC06|Jane|||
+|TC07||Doe||
+|TC08|Jane|||
+### Questions
 
 
 
