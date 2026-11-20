@@ -153,19 +153,96 @@ Valid data <br>
 - Last Name: Doe
 - Postal Code: 100001
 
-|Test ID| First Name|Last Name|Postal Code|Response|
+|Test ID| First Name|Last Name|Postal Code|Pass/Fail|
 |---|---|---|---|---|
-|TC01|Jane|Doe|100001||
-|TC02||Doe|100001|
-|TC03|Jane||100001|
-|TC04|Jane|Doe||
-|TC05||Doe||
-|TC06|Jane|||
-|TC07||Doe||
-|TC08|Jane|||
+|TC01|Jane|Doe|100001|Pass|
+|TC02||Doe|100001|Fail (Error: First Name is required)|
+|TC03|Jane||100001|Fail(Error: Last Name is required)|
+|TC04|Jane|Doe||Fail(Error: Postal Code is required)|
+|TC05|A|Doe|100001|Pass|
+|TC06|Jane|A|100001|Pass|
+|TC07|TIDTEVDDVDSERWQHDIYDGSDDJHSBDSJD|Doe|100001|Pass|
+|TC08|Jane|TIDTEVDDVDSERWQHDIYDGSDDJHSBDSJD|100001|Pass|
+|TC09|Spaces only ("   ")|Doe|100001|Pass|
+|TC10|Jane|Spaces only ("   ")|100001|Pass|
+|TC11|4332556|Doe|100001|Pass|
+|TC12|Jane|4332556|100001|Pass|
+|TC13|@$%#@|Doe|100001|Pass|
+|TC14|Jane|@$%#@|100001|Pass|
+|TC15|Jane|Doe|121|Pass|
+|TC16|Jane|Doe|12345678901|Pass|
+|TC17|Jane|Doe|RDGWFG|Pass|
+|TC18|Jane|Doe|@$%#@|Pass|
+|TC19|Jack-Sparrow|Anne-Mary|100001|Pass|
+|TC20|D'Angelo|O'Neil|100001|Pass|
+
+**Fail:** meant that I remained on the checkout form page with the error displayed.  <br>
+**Pass:** meant that I was directed to the Checkout:Overview page which shows the details of the product(s) Qty and Description, Payment Information, Shipping Information and Total Price. There's also a "Cancel" button to cancel the order, and a Finish button that directs you to a Thank you page.
+
 ### Questions
+- Why did the checkout form accept every input value?
+- Why did the checkout form accept only spaces in the field?
+- Why did the checkout form only flag empty fields? Is that intended??
+
+## 3. Sauce Demo login decision table 
+
+### Conditions and actions 
+Conditions:
+- C1: Is the username valid? (One of the usernames the page lists.)
+- C2: Is the password correct?
+- C3: Is the user locked out? (The locked_out_user account.)
+Actions:
+- A1: Login successful, Go to Products page
+- A2: Login Fails, display error message "Password is incorrect"
+- A3: Login Fails, display error message "User is locked out"
+
+### Full table, then simplified table (with why) 
+
+||R1|R2|R3|R4|R5|R6|R7|R8|
+|---|---|---|---|---|---|---|---|---|
+|Is the username valid?|T|T|T|T|F|F|F|F|
+|Is the password correct?|T|T|F|F|T|T|F|F|
+|Is the user locked out?|T|F|T|F|T|F|T|F|
+|Go to Products page||X|||N/A||N/A||
+|Display error message "Password is incorrect"|X||X|X|N/A|X|N/A|X|
+|display error message "User is locked out"|X||||||||
+
+A username cannot be invalid and locked out. It is an impossible combination  Since the username must be valid for login to be possible, the columns will be merged.
+
+**Simplified Table**
+
+||R1|R2|R3|R4|
+|---|---|---|---|---|
+|Is the password correct?|T|T|F|F|
+|Is the user locked out?|T|F|T|F|
+|Go to Products page||X|||
+|Display error message "Password is incorrect"|||X|X|
+|display error message "User is locked out"|X||||
+
+### Test data and observed results 
+
+|Username|Password|Expected response|Actual Response|
+|---|---|---|---|
+|standard_user|secret_sauce|Login successful|*Login successful, it moved to Products page*|
+|standard_user|wrong_password|Login Failed: "Invalid username/password"|Epic sadface: Username and password do not match any user in this service|
+|locked_out_user|secret_sauce|Login rejected:"User is locked out"|Epic sadface: Sorry, this user has been locked out.
+|locked_out_user|wrong_password|Login Failed: "Invalid username/password"|Epic sadface: Username and password do not match any user in this service
+|invalid_user|secret_sauce|Login rejected:"User does not exist"|Epic sadface: Username and password do not match any user in this service
+|invalid_user|wrong_password|Login rejected:"User does not exist"|Epic sadface: Username and password do not match any user in this service
+
+### Bonus tests (empty fields, capitals, spaces)
+
+|Test Case|Username|Password|Response/results|
+|---|---|---|---|
+|Empty Username|(blank)|secret_sauce|Epic sadface: Username is required|
+|Empty Password|standard_user|(blank)|Epic sadface: Password is required|
+|Both fields empty|(blank)|(blank)|Epic sadface: Username is required|
+|Username in capital letters|STANDARD_USER|secret_sauce|Epic sadface: Username and password do not match any user in this service|
+|Leading space|" standard_user"|secret_sauce|Epic sadface: Username and password do not match any user in this service|
 
 
+## 4. What I learned 
+Quality Assurance is a responsibility that requires careful observation of the software, testing every possible input to ensure that it is optimal for the users. Usage of Conditions, Partitions, and Boundary values helps with proper test case planning for a better testing experience.
 
 
 
