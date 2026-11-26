@@ -153,28 +153,28 @@ Valid data <br>
 - Last Name: Doe
 - Postal Code: 100001
 
-|Test ID| First Name|Last Name|Postal Code|Pass/Fail|
-|---|---|---|---|---|
-|TC01|Jane|Doe|100001|Pass|
-|TC02||Doe|100001|Fail (Error: First Name is required)|
-|TC03|Jane||100001|Fail(Error: Last Name is required)|
-|TC04|Jane|Doe||Fail(Error: Postal Code is required)|
-|TC05|A|Doe|100001|Pass|
-|TC06|Jane|A|100001|Pass|
-|TC07|TIDTEVDDVDSERWQHDIYDGSDDJHSBDSJD|Doe|100001|Pass|
-|TC08|Jane|TIDTEVDDVDSERWQHDIYDGSDDJHSBDSJD|100001|Pass|
-|TC09|Spaces only ("   ")|Doe|100001|Pass|
-|TC10|Jane|Spaces only ("   ")|100001|Pass|
-|TC11|4332556|Doe|100001|Pass|
-|TC12|Jane|4332556|100001|Pass|
-|TC13|@$%#@|Doe|100001|Pass|
-|TC14|Jane|@$%#@|100001|Pass|
-|TC15|Jane|Doe|121|Pass|
-|TC16|Jane|Doe|12345678901|Pass|
-|TC17|Jane|Doe|RDGWFG|Pass|
-|TC18|Jane|Doe|@$%#@|Pass|
-|TC19|Jack-Sparrow|Anne-Mary|100001|Pass|
-|TC20|D'Angelo|O'Neil|100001|Pass|
+|Test ID| First Name|Last Name|Postal Code|Expected Results|Actual Results|Pass/Fail|
+|---|---|---|---|---|---|---|
+|TC01|Jane|Doe|100001|'Checkout: Overview' page is displayed|'Checkout: Overview' page is displayed|Pass|
+|TC02||Doe|100001|Remain on information page, Error: First Name is required)|Remain on information page, Error: First Name is required|Pass|
+|TC03|Jane||100001|Remain on information page, Error: Last Name is required|Remain on information page, Error: Last Name is required)|Pass|
+|TC04|Jane|Doe||Remain on information page, Error: Postal Code is required|Remain on information page, Error: Postal Code is required|Pass|
+|TC05|A|Doe|100001|Remain on information page, Error: First name is too short|'Checkout: Overview' page is displayed|Fail|
+|TC06|Jane|A|100001|Remain on information page, Error: Last name is too short|'Checkout: Overview' page is displayed|Fail|
+|TC07|TIDTEVDDVDSERWQHDIYDGSDDJHSBDSJD|Doe|100001|Remain on information page, Error: First name is too long|'Checkout: Overview' page is displayed|Fail|
+|TC08|Jane|TIDTEVDDVDSERWQHDIYDGSDDJHSBDSJD|100001|Remain on information page, Error: Last name is too long|'Checkout: Overview' page is displayed|Fail|
+|TC09|Spaces only ("   ")|Doe|100001|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC10|Jane|Spaces only ("   ")|100001|Remain on information page Error:,|'Checkout: Overview' page is displayed|Fail|
+|TC11|4332556|Doe|100001|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC12|Jane|4332556|100001|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC13|@$%#@|Doe|100001|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC14|Jane|@$%#@|100001|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC15|Jane|Doe|121|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC16|Jane|Doe|12345678901|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC17|Jane|Doe|RDGWFG|'Checkout: Overview' page is displayed|'Checkout: Overview' page is displayed|Pass|
+|TC18|Jane|Doe|@$%#@|Remain on information page, Error:|'Checkout: Overview' page is displayed|Fail|
+|TC19|Jack-Sparrow|Anne-Mary|100001|'Checkout: Overview' page is displayed|'Checkout: Overview' page is displayed|Pass|
+|TC20|D'Angelo|O'Neil|100001|'Checkout: Overview' page is displayed|'Checkout: Overview' page is displayed|Pass|
 
 **Fail:** meant that I remained on the checkout form page with the error displayed.  <br>
 **Pass:** meant that I was directed to the Checkout:Overview page which shows the details of the product(s) Qty and Description, Payment Information, Shipping Information and Total Price. There's also a "Cancel" button to cancel the order, and a Finish button that directs you to a Thank you page.
